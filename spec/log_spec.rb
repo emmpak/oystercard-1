@@ -1,6 +1,6 @@
-require 'journeylog'
+require 'log'
 
-describe JourneyLog do
+describe Log do
   subject(:log) { described_class.new }
 
   describe 'initialize' do

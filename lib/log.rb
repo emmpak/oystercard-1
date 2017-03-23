@@ -1,5 +1,5 @@
 
-class JourneyLog
+class Log
 
   attr_reader :journey_history
 

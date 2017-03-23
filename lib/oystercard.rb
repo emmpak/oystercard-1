@@ -1,4 +1,6 @@
 require_relative 'journey'
+require_relative 'log'
+
 #Card used for TFL travel
 class Oystercard
 
@@ -7,11 +9,11 @@ class Oystercard
   MINIMUM_CHARGE = 1
   PENALTY_FARE = 6
 
-  attr_reader :balance, :journey_history, :journey
+  attr_reader :balance, :journey, :log
 
   def initialize
     @balance = 0
-    @journey_history = []
+    @log = Log.new
   end
 
   def in_journey?
@@ -33,7 +35,9 @@ class Oystercard
   def touch_out(station)
     if in_journey?
       journey.finish(station)
-      log_journey
+      deduct(MINIMUM_CHARGE)
+      log.add_trip(journey.current_trip)
+      self.journey = nil
     else
       charge_penalty
     end
@@ -42,12 +46,6 @@ class Oystercard
   private
 
   attr_writer :balance, :journey
-
-  def log_journey
-    journey_history << journey.current_trip
-    deduct(MINIMUM_CHARGE)
-    self.journey = nil
-  end
 
   def charge_penalty
     puts "Penalty Fare Deducted"

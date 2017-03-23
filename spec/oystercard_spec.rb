@@ -10,10 +10,6 @@ describe Oystercard do
     it "has balance of zero" do
       expect(oystercard.balance).to eq(0)
     end
-
-    it "has an empty array by default" do
-      expect(oystercard.journey_history).to be_empty
-    end
   end
 
   describe "#top_up" do
@@ -34,7 +30,25 @@ describe Oystercard do
     end
   end
 
-  context "#journeys" do
+  describe "touch_out" do
+    before do
+      oystercard.top_up(50)
+      oystercard.touch_in(entry_station)
+    end
+
+    it "calls the finish method on journey" do
+      expect(oystercard.journey).to receive(:finish).with(entry_station)
+      oystercard.touch_out(entry_station)
+    end
+
+    it "calls the add_trip method on log" do
+      expect(oystercard.log).to receive(:add_trip)
+      oystercard.touch_out(entry_station)
+    end
+
+  end
+
+  context "#journey status" do
     before do
       oystercard.top_up(50)
     end
@@ -53,6 +67,12 @@ describe Oystercard do
       oystercard.touch_out(exit_station)
       expect(oystercard).to_not be_in_journey
     end
+  end
+
+  context "#journey fare" do
+    before do
+      oystercard.top_up(50)
+    end
 
     it "expects penalty charge after two consecutive touch_ins" do
       oystercard.touch_in(entry_station)
@@ -68,12 +88,5 @@ describe Oystercard do
       expect{oystercard.touch_out(entry_station)}.to change{oystercard.balance}.by -Oystercard::MINIMUM_CHARGE
     end
 
-    it "stores a journey in history" do
-      allow(journey).to receive(:start)
-      allow(journey).to receive(:finish)
-      oystercard.touch_in(entry_station)
-      oystercard.touch_out(exit_station)
-      expect(oystercard.journey_history.length).to eq 1
-    end
   end
 end
