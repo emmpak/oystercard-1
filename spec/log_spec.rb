@@ -9,11 +9,11 @@ describe Log do
     end
   end
 
-  describe '#logger' do
+  describe '#add_trip' do
     it 'adds complete journey to log' do
-      current_trip = double(:current_trip)
-      log.add_trip(current_trip)
-      expect(log.journey_history).to include current_trip
+      trip = double(:trip)
+      log.add_trip(trip)
+      expect(log.journey_history).to include trip
     end
   end
 

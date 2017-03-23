@@ -28,6 +28,15 @@ describe Oystercard do
     it "raises error if below minimum balance" do
       expect{oystercard.touch_in(entry_station)}.to raise_error "Insufficient funds: Please top-up."
     end
+
+    it "calls the add_trip method on log when in_journey" do
+      oystercard.top_up(50)
+      allow(oystercard).to receive(:in_journey?) {true}
+      expect(oystercard.log).to receive(:add_trip)
+      oystercard.touch_in(entry_station)
+    end
+
+
   end
 
   describe "touch_out" do
@@ -46,6 +55,11 @@ describe Oystercard do
       oystercard.touch_out(entry_station)
     end
 
+    it "calls the add_trip method on log when not in_journey" do
+      oystercard.touch_out(entry_station)
+      expect(oystercard.log).to receive(:add_trip)
+      oystercard.touch_out(entry_station)
+    end
   end
 
   context "#journey status" do

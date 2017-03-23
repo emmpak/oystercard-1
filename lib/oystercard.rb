@@ -27,7 +27,10 @@ class Oystercard
 
   def touch_in(station)
     fail "Insufficient funds: Please top-up." if insufficient_funds?
-    charge_penalty if in_journey?
+    if in_journey?
+      charge_penalty
+      log.add_trip("tie at #{station}")
+    end
     self.journey = Journey.new
     journey.start(station)
   end
@@ -40,6 +43,7 @@ class Oystercard
       self.journey = nil
     else
       charge_penalty
+      log.add_trip("toe at #{station}")
     end
   end
 
