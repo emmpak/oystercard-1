@@ -1,10 +1,13 @@
 require 'journey'
 
-
 describe Journey do
-  let(:entry_station) { double :entry_station }
-  let(:exit_station) { double :exit_station }
+  let(:entry_station) { double :entry_station, zone: 1 }
+  let(:exit_station) { double :exit_station, zone: 3 }
   subject(:journey) {described_class.new}
+
+  it 'initializes with an instance of fare' do
+    expect(journey.fare).to be_truthy
+  end
 
   describe '#start' do
     it "takes entry station" do
@@ -28,6 +31,10 @@ describe Journey do
       expect(journey.current_trip).to eq ({entry_station => exit_station})
     end
 
+    # it 'calls the calculate method on fare' do
+    #   current_trip = {entry_station => exit_station}
+    #   expect(journey.fare).to receive(:calculate).with(journey.current_trip)
+    #   journey.finish(exit_station)
+    # end
   end
-
 end
