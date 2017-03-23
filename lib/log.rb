@@ -7,8 +7,8 @@ class Log
     @journey_history = []
   end
 
-  def add_trip(current_trip)
-    journey_history << current_trip
+  def add_trip(trip)
+    journey_history << trip
   end
 
 end
