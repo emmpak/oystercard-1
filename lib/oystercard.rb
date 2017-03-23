@@ -1,5 +1,6 @@
 require_relative 'journey'
 require_relative 'log'
+require_relative 'fare'
 
 #Card used for TFL travel
 class Oystercard
@@ -35,7 +36,8 @@ class Oystercard
   def touch_out(station)
     if in_journey?
       journey.finish(station)
-      deduct(MINIMUM_CHARGE)
+      deduct(journey.amount)
+      p journey.amount
       log.add_trip(journey.current_trip)
       self.journey = nil
     else
