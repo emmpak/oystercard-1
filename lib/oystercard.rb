@@ -2,7 +2,10 @@ require_relative 'journey'
 require_relative 'log'
 require_relative 'fare'
 
-#Card used for TFL travel
+#Gets journey fares and deducts them from card balance
+#sends completed journeys to card's log
+#detects incomplete journeys and deducts penalty fare from balance
+#returns error messages for topping up over maximum balance and running out of money
 class Oystercard
 
   MAXIMUM_BALANCE = 90

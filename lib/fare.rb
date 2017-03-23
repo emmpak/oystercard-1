@@ -1,5 +1,6 @@
 require_relative 'station'
 
+#calculates fare based on station zones
 class Fare
 
   def calculate(trip)

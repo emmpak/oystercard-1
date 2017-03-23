@@ -1,4 +1,4 @@
-
+#adds all trips (both complete and incomplete) to journey history 
 class Log
 
   attr_reader :journey_history

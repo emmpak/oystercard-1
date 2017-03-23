@@ -1,7 +1,7 @@
 require_relative 'fare'
 
-#we are adding journeys, completing journeys and knowing if a journey is incomplete
-#decides if penalty fare is necessary
+#Compiles entry station and exit station to a journey.
+#Gets fare and sends it to oystercard
 class Journey
   attr_reader :current_trip, :fare, :amount
 
