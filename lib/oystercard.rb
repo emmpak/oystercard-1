@@ -37,7 +37,6 @@ class Oystercard
     if in_journey?
       journey.finish(station)
       deduct(journey.amount)
-      p journey.amount
       log.add_trip(journey.current_trip)
       self.journey = nil
     else

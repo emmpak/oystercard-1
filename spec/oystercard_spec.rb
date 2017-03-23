@@ -35,8 +35,6 @@ describe Oystercard do
       expect(oystercard.log).to receive(:add_trip)
       oystercard.touch_in(entry_station)
     end
-
-
   end
 
   describe "touch_out" do
@@ -47,6 +45,7 @@ describe Oystercard do
 
     it "calls the finish method on journey" do
       expect(oystercard.journey).to receive(:finish).with(entry_station)
+      allow(oystercard.journey).to receive(:amount) {2}
       oystercard.touch_out(entry_station)
     end
 
