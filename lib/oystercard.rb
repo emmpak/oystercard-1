@@ -27,10 +27,7 @@ class Oystercard
 
   def touch_in(station)
     fail "Insufficient funds: Please top-up." if insufficient_funds?
-    if in_journey?
-      charge_penalty
-      log.add_trip("tie at #{station}")
-    end
+    charge_penalty(station) if in_journey?
     self.journey = Journey.new
     journey.start(station)
   end
@@ -42,8 +39,7 @@ class Oystercard
       log.add_trip(journey.current_trip)
       self.journey = nil
     else
-      charge_penalty
-      log.add_trip("toe at #{station}")
+      charge_penalty(station)
     end
   end
 
@@ -51,9 +47,10 @@ class Oystercard
 
   attr_writer :balance, :journey
 
-  def charge_penalty
+  def charge_penalty(station)
     puts "Penalty Fare Deducted"
     deduct(PENALTY_FARE)
+    in_journey? ? log.add_trip("tie at #{station}") : log.add_trip("toe at #{station}")
   end
 
   def deduct(amount)
