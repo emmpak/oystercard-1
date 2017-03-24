@@ -31,10 +31,5 @@ describe Journey do
       expect(journey.current_trip).to eq ({entry_station => exit_station})
     end
 
-    # it 'calls the calculate method on fare' do
-    #   current_trip = {entry_station => exit_station}
-    #   expect(journey.fare).to receive(:calculate).with(journey.current_trip)
-    #   journey.finish(exit_station)
-    # end
   end
 end

@@ -9,8 +9,6 @@ attr_reader :name, :zone
     @zone = lookup
   end
 
-  #user enters station name as an argument, station class looks up zone in data variable
-
   private
 
   def lookup

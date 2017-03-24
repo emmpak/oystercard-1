@@ -12,9 +12,3 @@ describe Fare do
   end
 
 end
-
-
-
-#
-# trip.keys[0].zone
-# trip.values[0].zone
