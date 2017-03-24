@@ -16,11 +16,11 @@ class Journey
 
   def finish(exit_station)
     self.current_trip = {current_trip.keys[0] => exit_station}
-    @amount = fare.calculate(current_trip)
+    self.amount = fare.calculate(current_trip)
   end
 
   private
 
-  attr_writer :current_trip
+  attr_writer :current_trip, :amount
 
 end

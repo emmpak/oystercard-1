@@ -12,7 +12,7 @@ attr_reader :name, :zone
   #user enters station name as an argument, station class looks up zone in data variable
 
   private
-  
+
   def lookup
     data = SmarterCSV.process('./TubeStations.csv')
     correct_zone = data.select { |hash| hash[:station] == name }
