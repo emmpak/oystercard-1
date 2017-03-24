@@ -11,20 +11,13 @@ attr_reader :name, :zone
 
   #user enters station name as an argument, station class looks up zone in data variable
 
+  private
+  
   def lookup
     data = SmarterCSV.process('./TubeStations.csv')
-
-    # data.each do |hash|
-    #   #is name the value of :station?
-    #
-    #   select hash[:station].include?(name)
-    # end
-
-
-    correct = data.select { |hash| hash[:station].include?(name) }
-    correct[0].values[1]
-
+    correct_zone = data.select { |hash| hash[:station] == name }
+    raise "Station not found" if !correct_zone[0]
+    correct_zone[0].values[1]
   end
-
 
 end

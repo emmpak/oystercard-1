@@ -2,15 +2,15 @@ require 'station'
 
 describe Station do
 
-  subject(:station) {described_class.new("Old St.",1)}
+  subject(:station) {described_class.new("Old Street")}
 
   describe "#initalize" do
 
     it 'has a name on creation' do
-      expect(station.name).to eq "Old St."
+      expect(station.name).to eq "Old Street"
     end
 
-    it 'has a zone on creation' do
+    it 'looks up stations zone from csv' do
       expect(station.zone).to eq 1
     end
   end
