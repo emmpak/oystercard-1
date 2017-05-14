@@ -4,12 +4,12 @@ During week 2, we were given the task to build the Osytercard system used by Lon
 * Object-Oriented Programming
 * Test-Driven Development
 
-Technologies used:
+### Technologies used:
 * Ruby
 * RSpec
 * Git / GitHub
 
-User Stories
+### User Stories
 ```
 In order to use public transport
 As a customer
