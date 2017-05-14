@@ -20,10 +20,6 @@ class Oystercard
     @log = Log.new
   end
 
-  def in_journey?
-    !!journey
-  end
-
   def top_up(amount)
     fail "Top up unsuccessful: Balance cannot exceed £#{MAXIMUM_BALANCE}." if balance + amount > MAXIMUM_BALANCE
     self.balance += amount
@@ -51,10 +47,15 @@ class Oystercard
 
   attr_writer :balance, :journey
 
+  def in_journey?
+    !!journey
+  end
+
   def charge_penalty(station)
     puts "Penalty Fare Deducted"
     deduct(PENALTY_FARE)
-    in_journey? ? log.add_trip("tie at #{station}") : log.add_trip("toe at #{station}")
+    log.add_trip("TIE at #{station}") if in_journey?
+    log.add_trip("TOE at #{station}") unless in_journey?
   end
 
   def deduct(amount)

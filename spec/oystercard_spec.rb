@@ -61,27 +61,6 @@ describe Oystercard do
     end
   end
 
-  context "#journey status" do
-    before do
-      oystercard.top_up(50)
-    end
-
-    it "expects card to not be in journey by default" do
-      expect(oystercard).to_not be_in_journey
-    end
-
-    it "expects card to be in journey once touched in" do
-      oystercard.touch_in(entry_station)
-      expect(oystercard).to be_in_journey
-    end
-
-    it "expects card not to be in journey once journey is completed" do
-      oystercard.touch_in(entry_station)
-      oystercard.touch_out(exit_station)
-      expect(oystercard).to_not be_in_journey
-    end
-  end
-
   context "#journey fare" do
     before do
       oystercard.top_up(50)
